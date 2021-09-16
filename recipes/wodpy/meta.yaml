@@ -1,0 +1,45 @@
+{% set name = "wodpy" %}
+{% set version = "1.6.2" %}
+
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/wodpy-{{ version }}.tar.gz
+  sha256: 7597cf340a05fe3ae2f6333668b7d60a0a35c483c292782d68fe592c52a4ee19
+
+build:
+  number: 0
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv
+
+requirements:
+  host:
+    - pip
+    - python
+  run:
+    - numpy
+    - pandas
+    - python
+
+test:
+  imports:
+    - wodpy
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://github.com/IQuOD/wodpy
+  summary: A parser for the WOD data format, described in http://data.nodc.noaa.gov/woa/WOD/DOC/wodreadme.pdf
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - BillMills
+    - s-good
+    - castelao
